@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+    before_action :authenticate_user!
     before_action :get_category
     def index
         @tasks = @category.tasks
@@ -10,7 +11,7 @@ class TasksController < ApplicationController
     end
 
     def edit
-        @task = Task.find(params[:id])
+        @task = @category.find(params[:id])
       end
     def update
         @task = @category.tasks.find(params[:id])
@@ -40,11 +41,11 @@ class TasksController < ApplicationController
     private
 
     def get_category
-        @category = Category.find(params[:category_id])
+        @category = current_user.categories.find(params[:category_id])
     end
 
     def task_params
-        params.require(:task).permit(:task_name, :category_id, :schedule, :date, :time)
+        params.require(:task).permit(:task, :date, :time)
     end
         
 end
