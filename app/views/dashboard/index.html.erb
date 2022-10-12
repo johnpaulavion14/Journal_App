@@ -13,7 +13,7 @@
   <tbody>
     <% @tasks_today.each_with_index do |task,index| %>
     <tr> 
-      <td><%= task.task_name %></td>
+      <td><%= task.task %></td>
       <td><%= task.time.strftime("%I:%M %p") %></td>
       <td><%= button_to @article_names[index], category_tasks_path(task.category_id),method: :get %></td>
     </tr>

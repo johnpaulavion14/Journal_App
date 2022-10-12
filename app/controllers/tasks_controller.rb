@@ -11,7 +11,7 @@ class TasksController < ApplicationController
     end
 
     def edit
-        @task = @category.find(params[:id])
+        @task = @category.tasks.find(params[:id])
       end
     def update
         @task = @category.tasks.find(params[:id])
@@ -21,7 +21,7 @@ class TasksController < ApplicationController
     end
 
     def create
-        @task = @category.tasks.build(task_params)
+        @task = @category.tasks.new(task_params)
         if @task.save
             redirect_to category_tasks_path
         else
