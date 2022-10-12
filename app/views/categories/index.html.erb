@@ -2,13 +2,34 @@
 
 <h1>Categories</h1>
 
-<div id="categories">
-  <% @categories.each do |category| %>
-    <%= render category %>
-    <p>
-      <%= link_to "Show this category", category %>
-    </p>
-  <% end %>
-</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Category</th>
+      <th scope="col">Description</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @categories.each do |category| %>
+    <tr> 
+      <td><%= category.category %>
+      <%= button_to "Edit", edit_category_path(category), method: :get %>
+      </td>
+      <td><%= category.description %>
+      <%= button_to "Show Tasks", category_tasks_path(category),method: :get %>
+      </td>
+      <td> <%= button_to "Delete", category, method: :delete %> </td>
+    </tr>
+    
+    <% end %>
 
-<%= link_to "New category", new_category_path %>
+  </tbody>
+</table>
+
+<%= button_to "Add Category ", new_category_path, method: :get %> 
+</br>
+
+<%= button_to "got back to home", dashboard_index_path, method: :get%>
+
+

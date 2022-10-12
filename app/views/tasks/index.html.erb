@@ -1,4 +1,4 @@
-<h2><%= @category.name %></h2>
+<h2><%= @category.category %></h2>
 
 <table class="table">
   <thead>
@@ -13,7 +13,7 @@
   <tbody>
     <% @tasks.each do |task| %>
     <tr> 
-      <td><%= task.task_name %></td>
+      <td><%= task.task %></td>
       <td><%= task.date.strftime("%B %d") %></td>
       <td><%= task.time.strftime("%I:%M %p") %></td>
       <td><%= button_to "Edit Task", edit_category_task_path(@category,task.id), {method: :get} %></td>
@@ -31,4 +31,4 @@
 </br>
 <%= button_to "Back to Categories", categories_path, {method: :get} %> 
 </br>
-<%= button_to "Back to Home", home_path, {method: :get} %> 
+<%= button_to "Back to Home", dashboard_index_path, {method: :get} %> 
