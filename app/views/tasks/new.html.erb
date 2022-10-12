@@ -1,0 +1,35 @@
+<%= form_with model: [@category, @task], local: true do |f| %>
+    <p>
+        <% if @task.errors.any?  %>
+            <ul>
+                <% @task.errors.full_messages.each do |message| %>
+                    <li>
+                        <%= message %>
+                    </li>
+                <% end %>
+            </ul>
+        <% end %>
+    </p>
+    
+    <p>
+        <%= f.label :task_name %>
+        <br />
+        <%= f.text_field :task_name%>
+        <br />
+        <%= f.label :date %>
+        <br />
+        <%= f.date_field :date %>
+        <br />
+        <%= f.label :time %>
+        <br />
+        <%= f.time_field :time %>
+
+
+    </p>
+   
+    <p>
+        <%= f.submit %>
+    </p>
+<% end %>
+
+<%= button_to "Back", category_tasks_path(@category), {method: :get} %>

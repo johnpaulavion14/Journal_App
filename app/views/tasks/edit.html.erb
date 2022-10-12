@@ -1,0 +1,22 @@
+<%= form_with scope: :task, url:update_task_path,  method: :patch, local: true do |f| %>
+ 
+    <p>
+        <%= f.label :task_name %>
+        <br />
+        <%= f.text_field :task_name%>
+        <br />
+        <%= f.label :date %>
+        <br />
+        <%= f.date_field :date %>
+        <br />
+        <%= f.label :time %>
+        <br />
+        <%= f.time_field :time %>
+    </p>
+   
+    <p>
+        <%= f.submit %>
+    </p>
+<% end %>
+
+<th><%= button_to "Back", category_tasks_path(@category), {method: :get} %></th>
