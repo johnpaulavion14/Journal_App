@@ -1,35 +1,46 @@
-<p style="color: green"><%= notice %></p>
+<div class="p-8">
+  <%= render "navbar" %>
+  <div class="flex flex-col items-center">
 
-<h1>Categories</h1>
+    <h1 class="font-pacifico text-5xl mb-4">All Categories</h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Category</th>
-      <th scope="col">Description</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @categories.each do |category| %>
-    <tr> 
-      <td><%= category.category %>
-      <%= button_to "Edit", edit_category_path(category), method: :get %>
-      </td>
-      <td><%= category.description %>
-      <%= button_to "Show Tasks", category_tasks_path(category),method: :get %>
-      </td>
-      <td> <%= button_to "Delete", category, method: :delete %> </td>
-    </tr>
-    
+    <% if params[:from] == "del"%>
+      <p class="text-center text-red-600 font-bold"><%= notice %></p>
+    <% elsif params[:from] == "new" || params[:from] == "update"%>
+      <p class="text-center text-green-600 font-bold"><%= notice %></p>    
     <% end %>
 
-  </tbody>
-</table>
+    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+        <div class="overflow-hidden">
+          <table class="table-auto mt-3">
+            <thead class="border-b bg-gray-800">
+              <tr>
+                <th scope="col" class="text-sm font-medium text-white px-6 py-4 text-left">#</th>
+                <th scope="col" class="text-sm font-medium text-white px-6 py-4 text-left hover:underline"><%=sort_link(@q, :category, 'Category', default_order: :asc)%></th>
+                <th scope="col" class="text-sm font-medium text-white px-6 py-4 text-left">Tasks</th>
+                <th scope="col" class="text-sm font-medium text-white px-6 py-4 text-left">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @categories.each_with_index do |category,index| %>
+              <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100"> 
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><%=index+1%></td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap hover:font-bold"><%= link_to category.category, edit_category_path(category.id) %></td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap hover:text-amber-900 hover:font-bold"><%= link_to "Show Tasks", category_tasks_path(category) %></td>
+                <td><%= button_to "Delete", category, method: :delete,class:"bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" %></td> 
+              </tr>
+              <% end %>
+            </tbody>
+          </table> 
+        </div>
+      </div>
+    </div>
 
-<%= button_to "Add Category ", new_category_path, method: :get %> 
-</br>
-
-<%= button_to "got back to home", dashboard_index_path, method: :get%>
+    <%= button_to "Add Category ", new_category_path, method: :get, class:"bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" %> 
+    </br>
+    <%= button_to "go back", dashboard_index_path, method: :get , class:"bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-5" %>
+  </div>
+</div>
 
 

@@ -11,7 +11,8 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
-        pacifico: ['Pacifico', ...defaultTheme.fontFamily.sans]
+        pacifico: ['Pacifico', ...defaultTheme.fontFamily.sans],
+        roboto: ['Roboto', ...defaultTheme.fontFamily.sans]
       },
     },
   },

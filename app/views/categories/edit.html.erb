@@ -1,10 +1,11 @@
-<h1>Editing category</h1>
-
-<%= render "form", category: @category %>
-
-<br>
-
-<div>
-  <%= link_to "Show this category", @category %> |
-  <%= link_to "Back to categories", categories_path %>
+<div class="p-8">
+    <%= render "navbar" %>
+    <h1 class="font-pacifico text-5xl text-center mb-4">Edit Category</h1>
+    <div class="bg-gray-800 p-8 flex flex-col items-center w-1/2 rounded-2xl mx-auto">
+        <%= render "form", category: @category %>
+    </div>
+    </br>
+    <div class="flex justify-center">
+        <%= button_to "Back to categories", categories_path, method: :get , class:"bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-5" %>
+    </div>
 </div>

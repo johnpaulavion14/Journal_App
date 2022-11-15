@@ -2,7 +2,7 @@
   <%= render "navbar" %>
   <div class="flex flex-col items-center">
 
-    <h1 class="font-pacifico text-5xl mb-4">Category: <%= @category.category %></h1>
+    <h1 class="font-pacifico text-5xl mb-4">All Tasks</h1>
 
     <% if params[:from] == "del"%>
       <p class="text-center text-red-600 font-bold"><%= notice %></p>
@@ -25,14 +25,14 @@
               </tr>
             </thead>
             <tbody>
-              <% @tasks.each_with_index do |task,index| %>
+              <% @all_tasks.each_with_index do |task,index| %>
               <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100"> 
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><%=index+1%></td>
                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap "><%= task.task %></td>
                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap "><%= task.date.strftime("%B %d") %></td>
                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap "><%= task.time.strftime("%I:%M %p") %></td>
-                <td><%= button_to "Edit", edit_category_task_path(@category,task.id),method: :get,class:"bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded" %></td> 
-                <td><%= button_to "Delete", delete_task_path(@category,task.id),method: :delete,class:"bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" %></td> 
+                <td><%= link_to "Edit", edit_category_task_path(task.category_id,task.id, {from: "all_tasks"}),method: :get,class:"bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded" %></td> 
+                <td><%= button_to "Delete", delete_task_path(task.category_id,task.id, {from: "all_tasks"}),method: :delete,class:"bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" %></td> 
               </tr>
               <% end %>
             </tbody>
@@ -41,8 +41,6 @@
       </div>
     </div>
 
-    <%= button_to "Add Tasks", new_category_task_path(@category), method: :get, class:"bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" %>
-    </br>
-    <%= button_to "Back", categories_path, method: :get , class:"bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-5" %>
+    <%= link_to "Add Tasks",new_task_path({from: "all_tasks"}), method: :get, class:"bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" %>
   </div>
 </div>

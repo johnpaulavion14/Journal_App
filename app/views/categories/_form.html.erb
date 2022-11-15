@@ -1,17 +1,11 @@
 <%= form_with(model: category) do |form| %>
 
-
-  <div>
-    <%= form.label :category, style: "display: block" %>
-    <%= form.text_field :category %>
-  </div>
-
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="flex flex-col justify-center text-center" >
+    <%= form.label :category, class:"font-pacifico text-2xl text-white"%>
+    <%= form.text_field :category, size:"20x1" ,class:"text-center", required: true %>
+    
+    <div class="mt-5">
+      <%= form.submit "Save",class:"bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" %>
+    </div>
   </div>
 <% end %>

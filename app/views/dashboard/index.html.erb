@@ -1,29 +1,64 @@
-<h1>Your Task For Today!</h1>
-<h4>Date: <%= Date.today.strftime("%B %d, %Y") %></h4>
-</br>
-</br>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Task</th>
-      <th scope="col">Time</th>
-      <th scope="col">Category</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @tasks_today.each_with_index do |task,index| %>
-    <tr> 
-      <td><%= task.task %></td>
-      <td><%= task.time.strftime("%I:%M %p") %></td>
-      <td><%= button_to @article_names[index], category_tasks_path(task.category_id),method: :get %></td>
-    </tr>
+<div class="p-8">
+  <%= render "navbar" %>
+  <div class="flex flex-col items-center">
+    <div class="font-pacifico text-5xl">
+      <% if @hours >= 17 %>
+        <span>Good Evening! </span>
+        <% elsif @hours >= 14 %>
+          <span>GoodA fternoon!</span>
+        <% elsif @hours >=12 %>
+          <span>Good Noon!</span>
+      <% else %>
+        <span>Good Morning!</span>
+      <% end %>
+      <span>This is Your Task for Today.<span>
+    </div>
+
+    </br>
+    <div class="flex flex-col mt-8">
+
+      <% if params[:from] == "del"%>
+        <p class="text-center text-red-600 font-bold"><%= notice %></p>
+      <% elsif params[:from] == "new" %>
+        <p class="text-center text-green-600 font-bold"><%= notice %></p>
+      <% end %>
+
+      <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+          <div class="overflow-hidden">
+            <table class="table-auto mt-3">
+              <thead class="border-b bg-gray-800">
+                <tr>
+                  <th scope="col" class="text-sm font-medium text-white px-6 py-4 text-left">#</th>
+                  <th scope="col" class="text-sm font-medium text-white px-6 py-4 text-left hover:underline"><%= sort_link(@q, :task, 'Task', default_order: :asc) %></th>
+                  <th scope="col" class="text-sm font-medium text-white px-6 py-4 text-left hover:underline"><%= sort_link(@q, :time, 'Time', default_order: :asc) %></th>
+                  <th scope="col" class="text-sm font-medium text-white px-6 py-4 text-left">Category</th>
+                  <th scope="col" class="text-sm font-medium text-white px-6 py-4 text-left">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @tasks_today.each_with_index do |task,index| %>
+                <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100"> 
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><%=index+1%></td>
+                  <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap hover:font-bold"><%= link_to task.task, edit_category_task_path(task.category_id,task.id, {from:"dash"})%></td>
+                  <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><%= task.time.strftime("%I:%M %p")%></td>
+                  <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap hover:text-amber-900 hover:font-bold"><%= link_to @article_names[index], category_tasks_path(task.category_id)%></td>
+                  <td ><%= button_to "delete", delete_task_path(task.category_id,task.id, {from:"dash"}), method: :delete, class:"bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" %></td> 
+                </tr>
+                <% end %>
+              </tbody>
+            </table> 
+          </div>
+        </div>
+      </div>
+    </div>  
+      <% if @tasks_today.length == 0 %>
+      <div class="font-roboto text-center text-3xl font-bold text-slate-600 border-dashed border-4 border-inherit p-3 italic hover:text-slate-400">
+        <%= link_to "Create your first task here!", new_task_path %>
+      </div>
     <% end %>
+    </br>
+  </div>
+</div>
 
-  </tbody>
-</table> 
 
-
-
-<%= button_to "Show All Categories", categories_path, method: :get %>
-</br>
-<%= button_to "Log Out", destroy_user_session_path, method: :delete %>

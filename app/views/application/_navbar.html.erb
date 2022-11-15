@@ -1,0 +1,23 @@
+<div class="flex">
+  <div class="w-1/5">
+    <h4 class="font-roboto font-light italic">Date: <%= Date.today.strftime("%B %d, %Y") %></h4>
+    <h4 class="font-roboto font-light italic"><%= current_user.email if signed_in? %></h4>
+    <%= button_to "Log Out", destroy_user_session_path, method: :delete, class:"bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" %>
+  </div>
+
+  <div class="flex gap-x-4 w-3/5 justify-center">
+    <%= button_to "Home", dashboard_index_path, method: :get, class:"bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" %>
+    <%= button_to "Show All Tasks", all_tasks_path, method: :get, class:"bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" %>
+    <%= button_to "Show All Categories", categories_path, method: :get, class:"bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" %>
+  </div>
+
+  <div class="w-1/5">
+  </div>
+</div>
+
+
+
+
+
+
+
