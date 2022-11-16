@@ -37,9 +37,13 @@
       </div>
     </div>
 
+    <% if @categories.length == 0 %>
+      <div class="font-roboto text-center text-3xl font-bold text-slate-600 border-dashed border-4 border-inherit p-3 italic hover:text-slate-400">
+        <%= link_to "Create your category here!", new_category_path %>
+      </div>
+    <% else %>
     <%= button_to "Add Category ", new_category_path, method: :get, class:"bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" %> 
-    </br>
-    <%= button_to "go back", dashboard_index_path, method: :get , class:"bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-5" %>
+    <% end %>
   </div>
 </div>
 

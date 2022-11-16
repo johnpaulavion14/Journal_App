@@ -41,6 +41,13 @@
       </div>
     </div>
 
-    <%= link_to "Add Tasks",new_task_path({from: "all_tasks"}), method: :get, class:"bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" %>
+    <% if @all_tasks.length == 0 %>
+      <div class="font-roboto text-center text-3xl font-bold text-slate-600 border-dashed border-4 border-inherit p-3 italic hover:text-slate-400">
+        <%= link_to "Create your first task here!", new_task_path({from: "all_tasks"}) %>
+      </div>
+    <% else %>
+      <%= link_to "Add Task",new_task_path({from: "all_tasks"}), method: :get, class:"bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" %>
+    <% end %>
+
   </div>
 </div>
